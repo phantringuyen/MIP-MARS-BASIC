@@ -1,0 +1,105 @@
+# Nhap tu ban phím 2 so nguyên, tính tong, hieu, tích, thuong cua 2 so do.
+.data
+	tb1: .asciiz "Nhap a: "
+	tb2: .asciiz "Nhap b: "
+	tb3: .asciiz "\nTong la: "
+	tb4: .asciiz "\nHieu la: "
+	tb5: .asciiz "\nTich la: "
+	tb6: .asciiz "\nThuong la: "
+	tb7: .asciiz "\nPhan du cua thuong: "
+	
+.text
+	#xuat tb1
+	li $v0,4
+	la $a0,tb1
+	syscall
+
+	#Nhap a, luu vao s0
+	li $v0,5
+	syscall
+
+	move $s0,$v0
+
+	#xuat tb2
+	li $v0,4
+	la $a0,tb2
+	syscall
+
+	#Nhap b, luu vao s1
+	li $v0,5
+	syscall
+
+	move $s1,$v0
+	
+Tong:
+	#xuat tb3
+	li $v0,4
+	la $a0,tb3
+	syscall
+	
+	# tinh tong
+	add $s2,$s0,$s1
+	
+	#xuat s2
+	li $v0,1
+	move $a0,$s2
+	syscall
+Hieu:
+	#xuat tb4
+	li $v0,4
+	la $a0,tb4
+	syscall
+	
+	# tinh hieu
+	sub $s3,$s0,$s1
+
+	#xuat s3
+	li $v0,1
+	move $a0,$s3
+	syscall
+	
+Tich:
+	#xuat tb5
+	li $v0,4
+	la $a0,tb5
+	syscall
+	
+	# tinh tich
+	mult $s0,$s1
+	mflo $s4
+	
+	#xuat s4
+	li $v0,1
+	move $a0,$s4
+	syscall
+Thuong:
+	#xuat tb6
+	li $v0,4
+	la $a0,tb6
+	syscall
+	
+	# tich thuong
+	div $s0,$s1
+	mflo $s5
+
+	#xuat s5
+	li $v0,1
+	move $a0,$s5
+	syscall
+	
+	#xuat tb7
+	li $v0,4
+	la $a0,tb7
+	syscall
+	
+	# tinh phan du
+	div $s0,$s1
+	mfhi $s6
+	
+	# xuat s6
+	li $v0,1
+	move $a0,$s6
+	syscall
+	
+	
+	

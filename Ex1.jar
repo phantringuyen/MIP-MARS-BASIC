@@ -1,0 +1,26 @@
+# Nhap vao 1 chuoi va xuat ra man hinh chuoi vua nhap
+.data
+	tb1: .asciiz "Nhap mot chuoi: "
+	tb2: .asciiz "\nChuoi da nhap: "
+	chuoi: .space 30
+.text
+	#xuat tb1
+	li $v0,4
+	la $a0,tb1
+	syscall
+
+	#Nhap chuoi
+	li $v0,8
+	la $a0,chuoi
+	li $a1,20
+	syscall
+
+	#xuat tb2
+	li $v0,4
+	la $a0,tb2
+	syscall
+	
+	#xuat ten
+	li $v0,4
+	la $a0,chuoi
+	syscall

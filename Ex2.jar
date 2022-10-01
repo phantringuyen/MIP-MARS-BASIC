@@ -1,0 +1,63 @@
+# Nhap vao mot ky tu, xuat ra ky tu lien truoc và lien sau.
+.data  
+
+	Nhap: .asciiz "Nhap vao 1 ki tu: "
+  	ktTruoc: .asciiz"\nKi tu dung truoc "
+  	ktSau: .asciiz"\nKi tu dung sau "
+ 	La: .asciiz " la "
+
+.text  
+
+main:  
+# xuat ham "Nhap" va nhap ki tu
+  la $a0, Nhap  
+  jal InRa
+  addi $v0, $0, 12  
+  syscall  
+  
+  addi $s0, $v0, 0  
+
+	# in ra ki tu truoc 
+  la $a0,ktTruoc  
+  jal InRa 
+
+# xuat ra ki tu da nhap
+  addi $a0, $s0, 0  
+  addi $v0, $0, 11  
+  syscall  
+  
+# xuat "la"
+  la $a0, La  
+  jal InRa 
+  
+# ki tu dung TRUOC can tim
+  addi $a0, $s0, -1  
+  addi $v0, $0, 11  
+  syscall  
+
+	# in ra ki tu sau
+  la $a0, ktSau  
+  jal InRa  
+  
+# xuat ki tu da nhap
+  addi $a0, $s0, 0  
+  addi $v0, $0, 11  
+  syscall  
+  
+# xuat "la"
+  la $a0, La  
+  jal InRa  
+
+# ki tu dung SAU can tim
+  addi $a0, $s0, 1  
+  addi $v0, $0, 11  
+  syscall  
+
+exit:  
+  addi $v0, $0, 10  
+  syscall   
+
+InRa:  
+  addi $v0, $0, 4  
+  syscall  
+  jr $ra
